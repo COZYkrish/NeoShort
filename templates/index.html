@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NeoShort | URL Shortener</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <h1>NeoShort</h1>
+    <p>Shorten your long URLs instantly</p>
+
+    <form method="POST" action="/shorten">
+        <input 
+            type="url" 
+            name="url" 
+            placeholder="Enter your long URL here"
+            required
+        >
+        <button type="submit">Shorten</button>
+    </form>
+
+    {% if short_url %}
+        <div>
+            <p>Short URL:</p>
+            <a href="{{ short_url }}" target="_blank">
+                {{ short_url }}
+            </a>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+</body>
+</html>
