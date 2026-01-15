@@ -21,14 +21,18 @@
         >
         <button type="submit">Shorten</button>
     </form>
+{% if short_url %}
+  <div class="result">
+    <p>Short URL:</p>
 
-    {% if short_url %}
-<div class="result">
-  <p>Short URL:</p>
-  <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
-</div>
+    <div class="copy-box">
+      <a id="shortUrl" href="{{ short_url }}" target="_blank">
+        {{ short_url }}
+      </a>
+      <button id="copyBtn">Copy</button>
+    </div>
+  </div>
 {% endif %}
-
 
     {% if error %}
         <p style="color: red;">{{ error }}</p>
