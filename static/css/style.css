@@ -86,3 +86,30 @@ button:hover {
     padding: 2rem;
   }
 }
+.copy-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.copy-box a {
+  flex: 1;
+  color: #00f5ff;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.copy-box button {
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #0ea5e9;
+  color: #000;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.copy-box button:hover {
+  box-shadow: 0 0 12px #0ea5e9;
+}
