@@ -8,7 +8,7 @@
 
 </head>
 <body>
-
+   <div class="card">
     <h1>NeoShort</h1>
     <p>Shorten your long URLs instantly</p>
 
@@ -34,6 +34,7 @@
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
+    </div>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
