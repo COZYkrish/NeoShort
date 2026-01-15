@@ -25,14 +25,16 @@
   <div class="result">
     <p>Short URL:</p>
 
-    <div class="copy-box">
+    <div class="short-url-box">
       <a id="shortUrl" href="{{ short_url }}" target="_blank">
         {{ short_url }}
       </a>
-      <button id="copyBtn">Copy</button>
     </div>
+
+    <button id="copyBtn">Copy</button>
   </div>
 {% endif %}
+
 
     {% if error %}
         <p style="color: red;">{{ error }}</p>

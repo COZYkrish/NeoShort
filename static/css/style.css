@@ -93,10 +93,13 @@ button:hover {
 }
 
 .copy-box a {
+
   flex: 1;
   color: #00f5ff;
   text-decoration: none;
-  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .copy-box button {
@@ -108,6 +111,10 @@ button:hover {
   color: #000;
   font-weight: bold;
   transition: 0.3s;
+  
+  min-width: 80px;
+  height: 40px;
+  padding: 0 1rem;
 }
 
 .copy-box button:hover {
@@ -130,4 +137,18 @@ button:hover {
 .toast.show {
   opacity: 1;
   transform: translateY(0);
+}
+.short-url-box {
+  background: #0f172a;
+  padding: 0.8rem;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+}
+
+.short-url-box a {
+  color: #00f5ff;
+  text-decoration: none;
+  display: block;
+  word-break: break-all;
+  font-size: 0.95rem;
 }
