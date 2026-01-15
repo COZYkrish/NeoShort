@@ -23,13 +23,12 @@
     </form>
 
     {% if short_url %}
-        <div>
-            <p>Short URL:</p>
-            <a href="{{ short_url }}" target="_blank">
-                {{ short_url }}
-            </a>
-        </div>
-    {% endif %}
+<div class="result">
+  <p>Short URL:</p>
+  <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+</div>
+{% endif %}
+
 
     {% if error %}
         <p style="color: red;">{{ error }}</p>

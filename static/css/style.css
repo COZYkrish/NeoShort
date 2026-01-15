@@ -62,3 +62,12 @@ button:hover {
   box-shadow: 0 0 20px #00f5ff;
   transform: translateY(-2px);
 }
+.result {
+  margin-top: 1.5rem;
+  word-break: break-all;
+}
+
+.result a {
+  color: #00f5ff;
+  text-decoration: none;
+}
