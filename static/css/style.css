@@ -81,3 +81,8 @@ button:hover {
     transform: translateY(0);
   }
 }
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem;
+  }
+}
