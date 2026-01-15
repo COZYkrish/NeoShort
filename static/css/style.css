@@ -113,3 +113,21 @@ button:hover {
 .copy-box button:hover {
   box-shadow: 0 0 12px #0ea5e9;
 }
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #00f5ff;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.4s;
+  font-weight: bold;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
