@@ -35,3 +35,30 @@ p {
   margin-bottom: 1.5rem;
   opacity: 0.9;
 }
+input {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-bottom: 1rem;
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+button {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #00f5ff, #7c7cff);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  box-shadow: 0 0 20px #00f5ff;
+  transform: translateY(-2px);
+}
