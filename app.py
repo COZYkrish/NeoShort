@@ -7,6 +7,7 @@ import re
 
 app = Flask(__name__)
 
+
 def is_valid_url(url):
     regex = re.compile(
         r'^(https?|ftp)://'        # protocol
@@ -16,9 +17,6 @@ def is_valid_url(url):
     )
     return re.match(regex, url) is not None
 
-# ======================
-# STORAGE CONFIG
-# ======================
 
 DATA_FILE = "data/urls.json"
 
@@ -39,14 +37,10 @@ def save_urls(urls):
 # ======================
 # SHORT CODE GENERATOR
 # ======================
-
 def generate_short_code(length=6):
     characters = string.ascii_letters + string.digits
     return ''.join(random.choice(characters) for _ in range(length))
 
-# ======================
-# ROUTES
-# ======================
 
 @app.route("/")
 def home():
@@ -67,13 +61,25 @@ def shorten_url():
 
     urls = load_urls()
 
-    for code, saved_url in urls.items():
-        if saved_url == long_url:
+    for code, data in urls.items():
+        if isinstance(data, str):
+            urls[code] = {
+                "url": data,
+                "clicks": 0
+            }
+            data = urls[code]
+
+        if data["url"] == long_url:
             short_url = request.host_url + code
+            save_urls(urls)
             return render_template("index.html", short_url=short_url)
 
     short_code = generate_short_code()
-    urls[short_code] = long_url
+    urls[short_code] = {
+        "url": long_url,
+        "clicks": 0
+    }
+
     save_urls(urls)
 
     short_url = request.host_url + short_code
@@ -84,13 +90,19 @@ def redirect_short_url(short_code):
     urls = load_urls()
 
     if short_code in urls:
-        return redirect(urls[short_code])
+        if isinstance(urls[short_code], str):
+            urls[short_code] = {
+                "url": urls[short_code],
+                "clicks": 0
+            }
+
+        urls[short_code]["clicks"] += 1
+        save_urls(urls)
+
+        return redirect(urls[short_code]["url"])
 
     return "Short URL not found", 404
 
-# ======================
-# APP RUN
-# ======================
 
 if __name__ == "__main__":
     app.run(debug=True)
