@@ -3,8 +3,18 @@ import json
 import os
 import random
 import string
+import re
 
 app = Flask(__name__)
+
+def is_valid_url(url):
+    regex = re.compile(
+        r'^(https?|ftp)://'        # protocol
+        r'([A-Za-z0-9-]+\.)+'      # domain
+        r'[A-Za-z]{2,}'            # TLD
+        r'(:\d+)?(/.*)?$'          # port & path
+    )
+    return re.match(regex, url) is not None
 
 # ======================
 # STORAGE CONFIG
@@ -49,9 +59,14 @@ def shorten_url():
     if not long_url:
         return render_template("index.html", error="Please enter a URL")
 
+    if not is_valid_url(long_url):
+        return render_template(
+            "index.html",
+            error="Invalid URL. Please include http:// or https://"
+        )
+
     urls = load_urls()
 
-    # Check if URL already exists
     for code, saved_url in urls.items():
         if saved_url == long_url:
             short_url = request.host_url + code
