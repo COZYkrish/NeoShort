@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+from datetime import datetime, timedelta
 import json
 import os
 import random
@@ -68,14 +69,18 @@ def shorten_url():
 
     urls = load_urls()
 
-    # 🔁 Existing URL check (with backward compatibility)
+    # 🔁 Existing URL check + backward compatibility
     for code, data in urls.items():
         if isinstance(data, str):
             urls[code] = {
                 "url": data,
-                "clicks": 0
+                "clicks": 0,
+                "expires_at": None
             }
             data = urls[code]
+
+        if "expires_at" not in data:
+            data["expires_at"] = None
 
         if data["url"] == long_url:
             short_url = request.host_url + code
@@ -88,9 +93,12 @@ def shorten_url():
 
     # 🆕 Create new short URL
     short_code = generate_short_code()
+    expires_at = datetime.now() + timedelta(days=7)
+
     urls[short_code] = {
         "url": long_url,
-        "clicks": 0
+        "clicks": 0,
+        "expires_at": expires_at.isoformat()
     }
 
     save_urls(urls)
@@ -106,19 +114,31 @@ def shorten_url():
 def redirect_short_url(short_code):
     urls = load_urls()
 
-    if short_code in urls:
-        if isinstance(urls[short_code], str):
-            urls[short_code] = {
-                "url": urls[short_code],
-                "clicks": 0
-            }
+    if short_code not in urls:
+        return "Short URL not found", 404
 
-        urls[short_code]["clicks"] += 1
-        save_urls(urls)
+    data = urls[short_code]
 
-        return redirect(urls[short_code]["url"])
+    # 🔒 Backward compatibility
+    if isinstance(data, str):
+        data = {
+            "url": data,
+            "clicks": 0,
+            "expires_at": None
+        }
+        urls[short_code] = data
 
-    return "Short URL not found", 404
+    # ⏳ Expiry check
+    if data["expires_at"]:
+        expiry_time = datetime.fromisoformat(data["expires_at"])
+        if datetime.now() > expiry_time:
+            return "This short link has expired", 410
+
+    # 📊 Increment clicks
+    data["clicks"] += 1
+    save_urls(urls)
+
+    return redirect(data["url"])
 
 # ======================
 # APP RUN
