@@ -16,3 +16,15 @@ function showToast(message) {
     toast.classList.remove("show");
   }, 2000);
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    const button = document.getElementById("shortenBtn");
+
+    if (!form || !button) return;
+
+    form.addEventListener("submit", () => {
+        button.disabled = true;
+        button.innerText = "Shortening...";
+        button.classList.add("loading");
+    });
+});

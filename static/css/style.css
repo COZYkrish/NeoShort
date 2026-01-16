@@ -172,3 +172,11 @@ button:hover {
   text-decoration: none;
   font-weight: bold;
 }
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.loading {
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+}
