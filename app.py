@@ -7,7 +7,9 @@ import re
 
 app = Flask(__name__)
 
-
+# ======================
+# URL VALIDATION
+# ======================
 def is_valid_url(url):
     regex = re.compile(
         r'^(https?|ftp)://'        # protocol
@@ -17,7 +19,9 @@ def is_valid_url(url):
     )
     return re.match(regex, url) is not None
 
-
+# ======================
+# STORAGE CONFIG
+# ======================
 DATA_FILE = "data/urls.json"
 
 def load_urls():
@@ -41,6 +45,9 @@ def generate_short_code(length=6):
     characters = string.ascii_letters + string.digits
     return ''.join(random.choice(characters) for _ in range(length))
 
+# ======================
+# ROUTES
+# ======================
 
 @app.route("/")
 def home():
@@ -61,6 +68,7 @@ def shorten_url():
 
     urls = load_urls()
 
+    # 🔁 Existing URL check (with backward compatibility)
     for code, data in urls.items():
         if isinstance(data, str):
             urls[code] = {
@@ -72,8 +80,13 @@ def shorten_url():
         if data["url"] == long_url:
             short_url = request.host_url + code
             save_urls(urls)
-            return render_template("index.html", short_url=short_url)
+            return render_template(
+                "index.html",
+                short_url=short_url,
+                clicks=data["clicks"]
+            )
 
+    # 🆕 Create new short URL
     short_code = generate_short_code()
     urls[short_code] = {
         "url": long_url,
@@ -83,7 +96,11 @@ def shorten_url():
     save_urls(urls)
 
     short_url = request.host_url + short_code
-    return render_template("index.html", short_url=short_url)
+    return render_template(
+        "index.html",
+        short_url=short_url,
+        clicks=0
+    )
 
 @app.route("/<short_code>")
 def redirect_short_url(short_code):
@@ -103,6 +120,8 @@ def redirect_short_url(short_code):
 
     return "Short URL not found", 404
 
-
+# ======================
+# APP RUN
+# ======================
 if __name__ == "__main__":
     app.run(debug=True)

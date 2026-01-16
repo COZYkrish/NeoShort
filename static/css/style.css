@@ -152,3 +152,8 @@ button:hover {
   word-break: break-all;
   font-size: 0.95rem;
 }
+.click-count {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #9ca3af;
+}

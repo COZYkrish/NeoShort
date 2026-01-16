@@ -34,6 +34,10 @@
     <button id="copyBtn">Copy</button>
   </div>
 {% endif %}
+{% if clicks is not none %}
+  <p class="click-count">Clicks: {{ clicks }}</p>
+{% endif %}
+
 
 
     {% if error %}
