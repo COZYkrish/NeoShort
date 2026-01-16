@@ -115,11 +115,14 @@ def redirect_short_url(short_code):
     urls = load_urls()
 
     if short_code not in urls:
-        return "Short URL not found", 404
+        return render_template(
+            "error.html",
+            message="This short URL does not exist or was removed."
+        ), 404
 
     data = urls[short_code]
 
-    # 🔒 Backward compatibility
+    # Backward compatibility
     if isinstance(data, str):
         data = {
             "url": data,
@@ -132,13 +135,17 @@ def redirect_short_url(short_code):
     if data["expires_at"]:
         expiry_time = datetime.fromisoformat(data["expires_at"])
         if datetime.now() > expiry_time:
-            return "This short link has expired", 410
+            return render_template(
+                "error.html",
+                message="This short link has expired."
+            ), 410
 
     # 📊 Increment clicks
     data["clicks"] += 1
     save_urls(urls)
 
     return redirect(data["url"])
+
 
 # ======================
 # APP RUN

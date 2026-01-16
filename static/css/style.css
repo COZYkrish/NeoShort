@@ -157,3 +157,18 @@ button:hover {
   font-size: 14px;
   color: #9ca3af;
 }
+.container {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 30px;
+  text-align: center;
+  background: #0f172a;
+  color: white;
+  border-radius: 12px;
+}
+
+.container a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: bold;
+}
