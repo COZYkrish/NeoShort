@@ -40,8 +40,6 @@ url-shortener/
 │ └── urls.json
 └── README.md
 
-yaml
-Copy code
 
 ---
 
@@ -74,12 +72,10 @@ bash
 Copy code
 pip install flask
 3️⃣ Run the application
-bash
-Copy code
+
 python app.py
 4️⃣ Open in browser
-cpp
-Copy code
+
 http://127.0.0.1:5000
 🎯 Purpose
 This project was built to:
