@@ -64,12 +64,11 @@ url-shortener/
 ## 📌 Installation & Setup
 
 ### 1️⃣ Clone the repository
-```bash
+
 git clone https://github.com/your-username/neo-short.git
 cd neo-short
 2️⃣ Install dependencies
-bash
-Copy code
+
 pip install flask
 3️⃣ Run the application
 
