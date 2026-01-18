@@ -70,7 +70,7 @@ cd neo-short
 2️⃣ Install dependencies
 
 pip install flask
-3️⃣ Run the application
+3️⃣ Run the application.
 
 python app.py
 4️⃣ Open in browser
