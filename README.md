@@ -77,7 +77,7 @@ python app.py
 
 http://127.0.0.1:5000
 🎯 Purpose
-This project was built to:
+## This project was built to:
 
 Practice backend development using Flask
 
