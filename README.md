@@ -81,11 +81,11 @@ This project was built to:
 
 Practice backend development using Flask
 
-Understand URL shortening logic.
+Understand URL shortening logic
 
-Build a modern, futuristic UI.
+Build a modern, futuristic UI
 
-Maintain meaningful GitHub commits.
+Maintain meaningful GitHub commits
 
 👨‍💻 Author
 Krish Sharma
