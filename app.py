@@ -140,9 +140,9 @@ def redirect_short_url(short_code):
                 message="This short link has expired."
             ), 410
 
-    # 📊 Increment clicks
-    # data["clicks"] += 1
-    # save_urls(urls)
+        # 📊 Increment clicks
+    data["clicks"] += 1
+    save_urls(urls)
 
     return redirect(data["url"])
 
