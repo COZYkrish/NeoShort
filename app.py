@@ -132,19 +132,19 @@ def redirect_short_url(short_code):
         urls[short_code] = data
 
     # ⏳ Expiry check
-    if data["expires_at"]:
-        expiry_time = datetime.fromisoformat(data["expires_at"])
-        if datetime.now() > expiry_time:
-            return render_template(
-                "error.html",
-                message="This short link has expired."
-            ), 410
+    # if data["expires_at"]:
+    #     expiry_time = datetime.fromisoformat(data["expires_at"])
+    #     if datetime.now() > expiry_time:
+    #         return render_template(
+    #             "error.html",
+    #             message="This short link has expired."
+    #         ), 410
 
-        # 📊 Increment clicks
-    data["clicks"] += 1
-    save_urls(urls)
+    #     # 📊 Increment clicks
+    # data["clicks"] += 1
+    # save_urls(urls)
 
-    return redirect(data["url"])
+    # return redirect(data["url"])
 
 
 # ======================
