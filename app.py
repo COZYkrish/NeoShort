@@ -117,10 +117,10 @@ def shorten_url():
 #     if short_code not in urls:
 #         return render_template(
 #             "error.html",
-#             message="This short URL does not exist or was removed."
-#         ), 404
+            message="This short URL does not exist or was removed."
+        ), 404
 
-#     data = urls[short_code]
+    data = urls[short_code]
 
     # Backward compatibility
     if isinstance(data, str):
