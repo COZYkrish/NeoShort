@@ -79,17 +79,17 @@ def shorten_url():
 #             }
 #             data = urls[code]
 
-#         if "expires_at" not in data:
-#             data["expires_at"] = None
+        if "expires_at" not in data:
+            data["expires_at"] = None
 
-#         if data["url"] == long_url:
-#             short_url = request.host_url + code
-#             save_urls(urls)
-#             return render_template(
-#                 "index.html",
-#                 short_url=short_url,
-#                 clicks=data["clicks"]
-#             )
+        if data["url"] == long_url:
+            short_url = request.host_url + code
+            save_urls(urls)
+            return render_template(
+                "index.html",
+                short_url=short_url,
+                clicks=data["clicks"]
+            )
 
     # 🆕 Create new short URL
     short_code = generate_short_code()
