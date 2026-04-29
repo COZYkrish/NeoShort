@@ -67,69 +67,69 @@ def shorten_url():
             error="Invalid URL. Please include http:// or https://"
         )
 
-    urls = load_urls()
+#     urls = load_urls()
 
-    # 🔁 Existing URL check + backward compatibility
-    for code, data in urls.items():
-        if isinstance(data, str):
-            urls[code] = {
-                "url": data,
-                "clicks": 0,
-                "expires_at": None
-            }
-            data = urls[code]
+#     # 🔁 Existing URL check + backward compatibility
+#     for code, data in urls.items():
+#         if isinstance(data, str):
+#             urls[code] = {
+#                 "url": data,
+#                 "clicks": 0,
+#                 "expires_at": None
+#             }
+#             data = urls[code]
 
-        if "expires_at" not in data:
-            data["expires_at"] = None
+#         if "expires_at" not in data:
+#             data["expires_at"] = None
 
-        if data["url"] == long_url:
-            short_url = request.host_url + code
-            save_urls(urls)
-            return render_template(
-                "index.html",
-                short_url=short_url,
-                clicks=data["clicks"]
-            )
+#         if data["url"] == long_url:
+#             short_url = request.host_url + code
+#             save_urls(urls)
+#             return render_template(
+#                 "index.html",
+#                 short_url=short_url,
+#                 clicks=data["clicks"]
+#             )
 
-    # 🆕 Create new short URL
-    short_code = generate_short_code()
-    expires_at = datetime.now() + timedelta(days=7)
+#     # 🆕 Create new short URL
+#     short_code = generate_short_code()
+#     expires_at = datetime.now() + timedelta(days=7)
 
-    urls[short_code] = {
-        "url": long_url,
-        "clicks": 0,
-        "expires_at": expires_at.isoformat()
-    }
+#     urls[short_code] = {
+#         "url": long_url,
+#         "clicks": 0,
+#         "expires_at": expires_at.isoformat()
+#     }
 
-    save_urls(urls)
+#     save_urls(urls)
 
-    short_url = request.host_url + short_code
-    return render_template(
-        "index.html",
-        short_url=short_url,
-        clicks=0
-    )
+#     short_url = request.host_url + short_code
+#     return render_template(
+#         "index.html",
+#         short_url=short_url,
+#         clicks=0
+#     )
 
-@app.route("/<short_code>")
-def redirect_short_url(short_code):
-    urls = load_urls()
+# @app.route("/<short_code>")
+# def redirect_short_url(short_code):
+#     urls = load_urls()
 
-    if short_code not in urls:
-        return render_template(
-            "error.html",
-            message="This short URL does not exist or was removed."
-        ), 404
+#     if short_code not in urls:
+#         return render_template(
+#             "error.html",
+#             message="This short URL does not exist or was removed."
+#         ), 404
 
-    data = urls[short_code]
+#     data = urls[short_code]
 
-    # # Backward compatibility
-    # if isinstance(data, str):
-    #     data = {
-    #         "url": data,
-    #         "clicks": 0,
-    #         "expires_at": None
-    #     }
-    #     urls[short_code] = data
+    # Backward compatibility
+    if isinstance(data, str):
+        data = {
+            "url": data,
+            "clicks": 0,
+            "expires_at": None
+        }
+        urls[short_code] = data
 
     # ⏳ Expiry check
     if data["expires_at"]:
