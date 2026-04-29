@@ -91,17 +91,17 @@ def shorten_url():
 #                 clicks=data["clicks"]
 #             )
 
-#     # 🆕 Create new short URL
-#     short_code = generate_short_code()
-#     expires_at = datetime.now() + timedelta(days=7)
+    # 🆕 Create new short URL
+    short_code = generate_short_code()
+    expires_at = datetime.now() + timedelta(days=7)
 
-#     urls[short_code] = {
-#         "url": long_url,
-#         "clicks": 0,
-#         "expires_at": expires_at.isoformat()
-#     }
+    urls[short_code] = {
+        "url": long_url,
+        "clicks": 0,
+        "expires_at": expires_at.isoformat()
+    }
 
-#     save_urls(urls)
+    save_urls(urls)
 
     short_url = request.host_url + short_code
     return render_template(
