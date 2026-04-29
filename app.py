@@ -110,9 +110,9 @@ def shorten_url():
 #         clicks=0
 #     )
 
-# @app.route("/<short_code>")
-# def redirect_short_url(short_code):
-#     urls = load_urls()
+@app.route("/<short_code>")
+def redirect_short_url(short_code):
+    urls = load_urls()
 
     if short_code not in urls:
         return render_template(
