@@ -103,12 +103,12 @@ def shorten_url():
 
 #     save_urls(urls)
 
-#     short_url = request.host_url + short_code
-#     return render_template(
-#         "index.html",
-#         short_url=short_url,
-#         clicks=0
-#     )
+    short_url = request.host_url + short_code
+    return render_template(
+        "index.html",
+        short_url=short_url,
+        clicks=0
+    )
 
 @app.route("/<short_code>")
 def redirect_short_url(short_code):
