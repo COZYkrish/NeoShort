@@ -122,14 +122,14 @@ def redirect_short_url(short_code):
 
     data = urls[short_code]
 
-    # Backward compatibility
-    if isinstance(data, str):
-        data = {
-            "url": data,
-            "clicks": 0,
-            "expires_at": None
-        }
-        urls[short_code] = data
+    # # Backward compatibility
+    # if isinstance(data, str):
+    #     data = {
+    #         "url": data,
+    #         "clicks": 0,
+    #         "expires_at": None
+    #     }
+    #     urls[short_code] = data
 
     # ⏳ Expiry check
     if data["expires_at"]:
